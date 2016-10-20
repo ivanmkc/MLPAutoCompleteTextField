@@ -443,15 +443,19 @@ withAutoCompleteString:(NSString *)string
             }
         }
         
-        [self.superview bringSubviewToFront:self];
-#if BROKEN
-        UIView *rootView = [self.window.subviews objectAtIndex:0];
-        [rootView insertSubview:self.autoCompleteTableView
-                   belowSubview:self];
-#else
-        [self.superview insertSubview:self.autoCompleteTableView
-                         belowSubview:self];
-#endif
+        UIView* v = self.autoCompleteParentView ? self.autoCompleteParentView : self.superview;
+        [v bringSubviewToFront:self];
+        [v insertSubview:self.autoCompleteTableView
+                     belowSubview:self];
+//        [self.superview bringSubviewToFront:self];
+//#if BROKEN
+//        UIView *rootView = [self.window.subviews objectAtIndex:0];
+//        [rootView insertSubview:self.autoCompleteTableView
+//                   belowSubview:self];
+//#else
+//        [self.superview insertSubview:self.autoCompleteTableView
+//                         belowSubview:self];
+//#endif
         [self.autoCompleteTableView setUserInteractionEnabled:YES];
         if(self.showTextFieldDropShadowWhenAutoCompleteTableIsOpen){
             [self.layer setShadowColor:[[UIColor blackColor] CGColor]];
@@ -668,11 +672,11 @@ withAutoCompleteString:(NSString *)string
     [self setAutoCompleteScrollIndicatorInsets:UIEdgeInsetsMake(18, 0, 0, 0)];
     [self setAutoCompleteContentInsets:UIEdgeInsetsMake(18, 0, 0, 0)];
     
-    if(self.backgroundColor == [UIColor clearColor]){
-        [self setAutoCompleteTableBackgroundColor:[UIColor whiteColor]];
-    } else {
-        [self setAutoCompleteTableBackgroundColor:self.backgroundColor];
-    }
+//    if(self.backgroundColor == [UIColor clearColor]){
+    [self setAutoCompleteTableBackgroundColor:[UIColor whiteColor]];
+//    } else {
+//        [self setAutoCompleteTableBackgroundColor:self.backgroundColor];
+//    }
 }
 
 - (void)setLineStyleForAutoCompleteTableView
@@ -684,11 +688,11 @@ withAutoCompleteString:(NSString *)string
     [self setAutoCompleteTableBorderWidth:1.0];
     [self setAutoCompleteTableBorderColor:[UIColor colorWithWhite:0.0 alpha:0.5]];
     
-    if(self.backgroundColor == [UIColor clearColor]){
+//    if(self.backgroundColor == [UIColor clearColor]){
         [self setAutoCompleteTableBackgroundColor:[UIColor whiteColor]];
-    } else {
-        [self setAutoCompleteTableBackgroundColor:self.backgroundColor];
-    }
+//    } else {
+//        [self setAutoCompleteTableBackgroundColor:self.backgroundColor];
+//    }
 }
 
 - (void)setNoneStyleForAutoCompleteTableView
@@ -713,11 +717,11 @@ withAutoCompleteString:(NSString *)string
                                              alpha:1.0];
     [self setAutoCompleteTableCellTextColor:blueTextColor];
     
-    if(self.backgroundColor == [UIColor clearColor]){
-        [self setAutoCompleteTableBackgroundColor:[UIColor whiteColor]];
-    } else {
-        [self setAutoCompleteTableBackgroundColor:self.backgroundColor];
-    }
+//    if(self.backgroundColor == [UIColor clearColor]){
+    [self setAutoCompleteTableBackgroundColor:[UIColor whiteColor]];
+//    } else {
+//        [self setAutoCompleteTableBackgroundColor:self.backgroundColor];
+//    }
 }
 
 - (void)saveCurrentShadowProperties
